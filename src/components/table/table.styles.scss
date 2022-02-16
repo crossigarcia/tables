@@ -1,0 +1,24 @@
+.table {
+   padding: 30px;
+   width: 70%;
+   border-collapse: collapse;
+
+   .table-header-row {
+      text-align: left;
+      text-transform: uppercase;
+
+      th {
+         font-weight: 400;
+      }
+   }
+
+   .table-data-row {
+      text-align: left;
+
+      td {
+         font-weight: 300;
+         padding: 10px 0;
+         border-bottom: 2px solid rgb(235, 235, 235);
+      }
+   }
+}
