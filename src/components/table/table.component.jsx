@@ -18,7 +18,7 @@ const Table = (props) => {
                   <td>{data.house}</td>
                   <td>{data.ancestry}</td>
                   <td>{data.patronus}</td>
-                  <td><Button variant="outlined" color="error" onClick={() => props.handleDelete(data.id)}>delete</Button></td>
+                  <td><Button variant="outlined" color="error" onClick={() => props.handleDelete(data.id, data.name)}>delete</Button></td>
                </tr> 
             )}
          </tbody>
