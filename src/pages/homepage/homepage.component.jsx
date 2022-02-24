@@ -16,6 +16,7 @@ class Homepage extends React.Component {
          idToDelete: -1,
          startIndex: 0,
          endIndex: 4,
+         totalItems: 0
       }
    }
 
@@ -30,6 +31,7 @@ class Homepage extends React.Component {
    }
 
    loadData = () => {
+      this.setState({ totalItems: data.length })
       let limitedData = [];
       for (let i = this.state.startIndex; i <= this.state.endIndex; i ++) {
          limitedData.push(data[i]);
@@ -43,10 +45,18 @@ class Homepage extends React.Component {
 
       if (name === "pagination-forward-btn") {
          this.setState({ startIndex: this.state.startIndex + 5});
-         this.setState({ endIndex: this.state.endIndex + 5});
+         if (this.state.endIndex + 5 > this.state.totalItems - 1) {
+            this.setState({ endIndex: this.state.totalItems - 1});
+         } else {
+            this.setState({ endIndex: this.state.endIndex + 5});
+         }
       } else {
          this.setState({ startIndex: this.state.startIndex - 5});
-         this.setState({ endIndex: this.state.endIndex - 5});
+         if (this.state.tableData.length < 5) {
+            this.setState({ endIndex: this.state.endIndex - this.state.tableData.length});
+         } else {
+            this.setState({ endIndex: this.state.endIndex - 5});
+         }
       }
    }
 
@@ -75,7 +85,7 @@ class Homepage extends React.Component {
                tbody={this.state.tableData}
                handleDelete={this.handleDelete}
             />
-            <Pagination handlePagination={this.handlePagination}/>
+            <Pagination handlePagination={this.handlePagination} startIndex={this.state.startIndex} endIndex={this.state.endIndex} total={this.state.totalItems - 1}/>
             <Popup open={this.state.open} handleClose={this.handleClose} handleConfirmDelete={this.handleConfirmDelete} name={this.state.nameToDelete}/>
          </div>
       )
